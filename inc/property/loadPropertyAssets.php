@@ -73,6 +73,27 @@ function pd_enqueue_archive_script()
 }
 add_action('wp_enqueue_scripts', 'pd_enqueue_archive_script');
 
+/**
+ * Gallery lightbox script (single property only).
+ */
+function pd_enqueue_single_property_script()
+{
+    if (!is_singular('property')) {
+        return;
+    }
+
+    $file = get_template_directory() . '/inc/property/js/single-property.js';
+
+    wp_enqueue_script(
+        'pd-single-property',
+        get_template_directory_uri() . '/inc/property/js/single-property.js',
+        array(),
+        file_exists($file) ? filemtime($file) : '1.0',
+        true
+    );
+}
+add_action('wp_enqueue_scripts', 'pd_enqueue_single_property_script');
+
 function pd_js_class()
 {
     echo "<script>document.documentElement.className += ' js';</script>\n";

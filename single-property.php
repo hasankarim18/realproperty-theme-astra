@@ -83,35 +83,40 @@ $area_units = array(
     'decimal' => __('decimal', 'property-directory'),
 );
 
-// Featured image (main gallery image) + ACF images (side gallery).
-$main_image_id  = get_post_thumbnail_id($post_id);
-$main_image_url = $main_image_id ? wp_get_attachment_image_url($main_image_id, 'large') : '';
-$main_image_alt = $main_image_id ? get_post_meta($main_image_id, '_wp_attachment_image_alt', true) : '';
+// Gallery: one ordered list, featured image first then ACF images 1..6.
+// The grid and the lightbox both read from this, so they never drift apart.
+$gallery_items = array();
 
-$side_images = array();
+$featured_id = get_post_thumbnail_id($post_id);
+if ($featured_id) {
+    $gallery_items[] = array(
+        'id'  => (int) $featured_id,
+        'alt' => get_post_meta($featured_id, '_wp_attachment_image_alt', true),
+    );
+}
+
+$used_image_ids = $featured_id ? array((int) $featured_id) : array();
+
 foreach ($image_fields as $field) {
     $img = pd_field($field, $post_id);
     // ACF image returns an array; may also be an ID int.
     $img_id = is_array($img) ? (isset($img['ID']) ? (int) $img['ID'] : 0) : (int) $img;
-    if (!$img_id) {
+    if (!$img_id || in_array($img_id, $used_image_ids, true)) {
         continue;
     }
-    $src = wp_get_attachment_image_url($img_id, 'medium_large');
-    if (!$src) {
+    if (!wp_get_attachment_image_url($img_id, 'medium_large')) {
         continue;
     }
-    $side_images[] = array(
-        'url' => $src,
+    $used_image_ids[] = $img_id;
+    $gallery_items[]  = array(
+        'id'  => $img_id,
         'alt' => get_post_meta($img_id, '_wp_attachment_image_alt', true),
     );
 }
-// If the property has no featured image, promote the first ACF image to main.
-if (!$main_image_url && $side_images) {
-    $main_image_url = $side_images[0]['url'];
-    $main_image_alt = $side_images[0]['alt'];
-    array_shift($side_images);
-}
-$gallery_count = count($side_images) + ($main_image_url ? 1 : 0);
+
+$gallery_count = count($gallery_items);
+$main_item     = $gallery_items ? $gallery_items[0] : null; // featured, or first ACF if no featured.
+$side_items    = array_slice($gallery_items, 1, 4);
 
 // Location line: taxonomy term + address.
 $location_terms = get_the_terms($post_id, 'property_location');
@@ -256,34 +261,31 @@ $inquiry_url = $inquiry_email
         <?php endif; ?>
     </section>
 
-    <?php if ($main_image_url || $side_images): ?>
+    <?php if ($main_item): ?>
         <section class="gallery" aria-label="<?php esc_attr_e('Property photo gallery', 'property-directory'); ?>">
-            <?php if ($main_image_url): ?>
-                <div class="gallery-photo gallery-photo-main has-image">
-                    <img src="<?php echo esc_url($main_image_url); ?>"
-                        alt="<?php echo esc_attr($main_image_alt ? $main_image_alt : get_the_title()); ?>"
-                        loading="lazy">
-                    <span class="photo-tag"><?php esc_html_e('Featured photo', 'property-directory'); ?></span>
-                </div>
-            <?php endif; ?>
+            <div class="gallery-photo gallery-photo-main has-image">
+                <img src="<?php echo esc_url(wp_get_attachment_image_url($main_item['id'], 'large')); ?>"
+                    alt="<?php echo esc_attr($main_item['alt'] ? $main_item['alt'] : get_the_title()); ?>"
+                    loading="lazy">
+                <span class="photo-tag"><?php esc_html_e('Featured photo', 'property-directory'); ?></span>
+            </div>
 
             <?php
             // Gallery classes two..five match the CSS placeholders' names.
             $side_classes = array('gallery-photo-two', 'gallery-photo-three', 'gallery-photo-four', 'gallery-photo-five');
             $shown = 0;
-            foreach ($side_images as $img) {
-                if ($shown >= 4) {
-                    break;
-                }
+            foreach ($side_items as $item) {
                 echo '<div class="gallery-photo ' . esc_attr($side_classes[$shown]) . ' has-image">';
-                echo '<img src="' . esc_url($img['url']) . '" alt="' . esc_attr($img['alt'] ? $img['alt'] : get_the_title()) . '" loading="lazy">';
+                echo '<img src="' . esc_url(wp_get_attachment_image_url($item['id'], 'medium_large')) . '" alt="' . esc_attr($item['alt'] ? $item['alt'] : get_the_title()) . '" loading="lazy">';
                 echo '</div>';
                 $shown++;
             }
             ?>
 
             <?php if ($gallery_count > 1): ?>
-                <button class="gallery-count" type="button">▦ <span><?php echo esc_html(sprintf(__('View all %d photos', 'property-directory'), $gallery_count)); ?></span></button>
+                <button class="gallery-count" type="button" data-pd-lightbox="property-lightbox"
+                    aria-haspopup="dialog" aria-controls="property-lightbox">▦
+                    <span><?php echo esc_html(sprintf(__('View all %d photos', 'property-directory'), $gallery_count)); ?></span></button>
             <?php endif; ?>
         </section>
     <?php endif; ?>
@@ -431,6 +433,8 @@ $inquiry_url = $inquiry_email
         </aside>
     </div>
 </main>
+
+<?php get_template_part('template-parts/property-gallery-modal', null, array('gallery_items' => $gallery_items)); ?>
 
 <?php
 get_footer();
