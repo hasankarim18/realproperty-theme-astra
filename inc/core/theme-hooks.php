@@ -9,7 +9,7 @@
  * @since       Astra 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 
@@ -57,11 +57,11 @@ add_theme_support(
 		'sidebar',
 		'footer',
 
-	/**
-	 * If/when WordPress Core implements similar methodology, Themes and Plugins
-	 * will be able to check whether the version of THA supplied by the theme
-	 * supports Core hooks.
-	 */
+		/**
+		 * If/when WordPress Core implements similar methodology, Themes and Plugins
+		 * will be able to check whether the version of THA supplied by the theme
+		 * supports Core hooks.
+		 */
 	)
 );
 
@@ -83,32 +83,36 @@ add_theme_support(
  *
  * @return bool
  */
-function astra_current_theme_supports( $bool, $args, $registered ) {
-	return in_array( $args[0], $registered[0] ) || in_array( 'all', $registered[0] );
+function astra_current_theme_supports($bool, $args, $registered)
+{
+	return in_array($args[0], $registered[0]) || in_array('all', $registered[0]);
 }
-add_filter( 'current_theme_supports-astra_hooks', 'astra_current_theme_supports', 10, 3 );
+add_filter('current_theme_supports-astra_hooks', 'astra_current_theme_supports', 10, 3);
 
 /**
  * HTML <html> hook
  * Special case, useful for <DOCTYPE>, etc.
  * $astra_supports[] = 'html;
  */
-function astra_html_before() {
-	do_action( 'astra_html_before' );
+function astra_html_before()
+{
+	do_action('astra_html_before');
 }
 /**
  * HTML <body> hooks
  * $astra_supports[] = 'body';
  */
-function astra_body_top() {
-	do_action( 'astra_body_top' );
+function astra_body_top()
+{
+	do_action('astra_body_top');
 }
 
 /**
  * Body Bottom
  */
-function astra_body_bottom() {
-	do_action( 'astra_body_bottom' );
+function astra_body_bottom()
+{
+	do_action('astra_body_bottom');
 }
 
 /**
@@ -116,15 +120,17 @@ function astra_body_bottom() {
  *
  * $astra_supports[] = 'head';
  */
-function astra_head_top() {
-	do_action( 'astra_head_top' );
+function astra_head_top()
+{
+	do_action('astra_head_top');
 }
 
 /**
  * Head Bottom
  */
-function astra_head_bottom() {
-	do_action( 'astra_head_bottom' );
+function astra_head_bottom()
+{
+	do_action('astra_head_bottom');
 }
 
 /**
@@ -132,84 +138,96 @@ function astra_head_bottom() {
  *
  * $astra_supports[] = 'header';
  */
-function astra_header_before() {
-	do_action( 'astra_header_before' );
+function astra_header_before()
+{
+	do_action('astra_header_before');
 }
 
 /**
  * Site Header
  */
-function astra_header() {
-	do_action( 'astra_header' );
+function astra_header()
+{
+	do_action('astra_header');
 }
 
 /**
  * Masthead Top
  */
-function astra_masthead_top() {
-	do_action( 'astra_masthead_top' );
+function astra_masthead_top()
+{
+	do_action('astra_masthead_top');
 }
 
 /**
  * Masthead
  */
-function astra_masthead() {
-	do_action( 'astra_masthead' );
+function astra_masthead()
+{
+	do_action('astra_masthead');
 }
 
 /**
  * Masthead Bottom
  */
-function astra_masthead_bottom() {
-	do_action( 'astra_masthead_bottom' );
+function astra_masthead_bottom()
+{
+	do_action('astra_masthead_bottom');
 }
 
 /**
  * Header After
  */
-function astra_header_after() {
-	do_action( 'astra_header_after' );
+function astra_header_after()
+{
+	do_action('astra_header_after');
 }
 
 /**
  * Main Header bar top
  */
-function astra_main_header_bar_top() {
-	do_action( 'astra_main_header_bar_top' );
+function astra_main_header_bar_top()
+{
+	do_action('astra_main_header_bar_top');
 }
 
 /**
  * Main Header bar bottom
  */
-function astra_main_header_bar_bottom() {
-	do_action( 'astra_main_header_bar_bottom' );
+function astra_main_header_bar_bottom()
+{
+	do_action('astra_main_header_bar_bottom');
 }
 
 /**
  * Main Header Content
  */
-function astra_masthead_content() {
-	do_action( 'astra_masthead_content' );
+function astra_masthead_content()
+{
+	do_action('astra_masthead_content');
 }
 /**
  * Main toggle button before
  */
-function astra_masthead_toggle_buttons_before() {
-	do_action( 'astra_masthead_toggle_buttons_before' );
+function astra_masthead_toggle_buttons_before()
+{
+	do_action('astra_masthead_toggle_buttons_before');
 }
 
 /**
  * Main toggle buttons
  */
-function astra_masthead_toggle_buttons() {
-	do_action( 'astra_masthead_toggle_buttons' );
+function astra_masthead_toggle_buttons()
+{
+	do_action('astra_masthead_toggle_buttons');
 }
 
 /**
  * Main toggle button after
  */
-function astra_masthead_toggle_buttons_after() {
-	do_action( 'astra_masthead_toggle_buttons_after' );
+function astra_masthead_toggle_buttons_after()
+{
+	do_action('astra_masthead_toggle_buttons_after');
 }
 
 /**
@@ -217,43 +235,49 @@ function astra_masthead_toggle_buttons_after() {
  *
  * $astra_supports[] = 'content';
  */
-function astra_content_before() {
-	do_action( 'astra_content_before' );
+function astra_content_before()
+{
+	do_action('astra_content_before');
 }
 
 /**
  * Content after
  */
-function astra_content_after() {
-	do_action( 'astra_content_after' );
+function astra_content_after()
+{
+	do_action('astra_content_after');
 }
 
 /**
  * Content top
  */
-function astra_content_top() {
-	do_action( 'astra_content_top' );
+function astra_content_top()
+{
+	do_action('astra_content_top');
 }
 
 /**
  * Content bottom
  */
-function astra_content_bottom() {
-	do_action( 'astra_content_bottom' );
+function astra_content_bottom()
+{
+	do_action('astra_content_bottom');
 }
 
 /**
  * Content while before
  */
-function astra_content_while_before() {
-	do_action( 'astra_content_while_before' );
+function astra_content_while_before()
+{
+	do_action('astra_content_while_before');
 }
 
 /**
  * Content loop
  */
-function astra_content_loop() {
-	do_action( 'astra_content_loop' );
+function astra_content_loop()
+{
+	do_action('astra_content_loop');
 }
 
 /**
@@ -261,15 +285,17 @@ function astra_content_loop() {
  *
  * Called from page.php
  */
-function astra_content_page_loop() {
-	do_action( 'astra_content_page_loop' );
+function astra_content_page_loop()
+{
+	do_action('astra_content_page_loop');
 }
 
 /**
  * Content while after
  */
-function astra_content_while_after() {
-	do_action( 'astra_content_while_after' );
+function astra_content_while_after()
+{
+	do_action('astra_content_while_after');
 }
 
 /**
@@ -277,71 +303,81 @@ function astra_content_while_after() {
  *
  * $astra_supports[] = 'entry';
  */
-function astra_entry_before() {
-	do_action( 'astra_entry_before' );
+function astra_entry_before()
+{
+	do_action('astra_entry_before');
 }
 
 /**
  * Entry after
  */
-function astra_entry_after() {
-	do_action( 'astra_entry_after' );
+function astra_entry_after()
+{
+	do_action('astra_entry_after');
 }
 
 /**
  * Entry content before
  */
-function astra_entry_content_before() {
-	do_action( 'astra_entry_content_before' );
+function astra_entry_content_before()
+{
+	do_action('astra_entry_content_before');
 }
 
 /**
  * Entry content after
  */
-function astra_entry_content_after() {
-	do_action( 'astra_entry_content_after' );
+function astra_entry_content_after()
+{
+	do_action('astra_entry_content_after');
 }
 
 /**
  * Entry Top
  */
-function astra_entry_top() {
-	do_action( 'astra_entry_top' );
+function astra_entry_top()
+{
+	do_action('astra_entry_top');
 }
 
 /**
  * Entry bottom
  */
-function astra_entry_bottom() {
-	do_action( 'astra_entry_bottom' );
+function astra_entry_bottom()
+{
+	do_action('astra_entry_bottom');
 }
 
 /**
  * Single Post Header Before
  */
-function astra_single_header_before() {
-	do_action( 'astra_single_header_before' );
+function astra_single_header_before()
+{
+	do_action('astra_single_header_before');
 }
 
 /**
  * Single Post Header After
  */
-function astra_single_header_after() {
-	do_action( 'astra_single_header_after' );
+function astra_single_header_after()
+{
+	do_action('astra_single_header_after');
 }
 
 /**
  * Single Post Header Top
  */
-function astra_single_header_top() {
-	do_action( 'astra_single_header_top' );
+function astra_single_header_top()
+{
+	do_action('astra_single_header_top');
 }
 
 /**
  * Single Post Header Bottom
  */
-function astra_single_header_bottom() {
-	do_action( 'astra_single_header_bottom' );
+function astra_single_header_bottom()
+{
+	do_action('astra_single_header_bottom');
 }
 
 /**
@@ -349,15 +385,17 @@ function astra_single_header_bottom() {
  *
  * $astra_supports[] = 'comments';
  */
-function astra_comments_before() {
-	do_action( 'astra_comments_before' );
+function astra_comments_before()
+{
+	do_action('astra_comments_before');
 }
 
 /**
  * Comments after.
  */
-function astra_comments_after() {
-	do_action( 'astra_comments_after' );
+function astra_comments_after()
+{
+	do_action('astra_comments_after');
 }
 
 /**
@@ -365,15 +403,17 @@ function astra_comments_after() {
  *
  * $astra_supports[] = 'sidebar';
  */
-function astra_sidebars_before() {
-	do_action( 'astra_sidebars_before' );
+function astra_sidebars_before()
+{
+	do_action('astra_sidebars_before');
 }
 
 /**
  * Sidebars after
  */
-function astra_sidebars_after() {
-	do_action( 'astra_sidebars_after' );
+function astra_sidebars_after()
+{
+	do_action('astra_sidebars_after');
 }
 
 /**
@@ -381,64 +421,73 @@ function astra_sidebars_after() {
  *
  * $astra_supports[] = 'footer';
  */
-function astra_footer() {
-	do_action( 'astra_footer' );
+function astra_footer()
+{
+	do_action('astra_footer');
 }
 
 /**
  * Footer before
  */
-function astra_footer_before() {
-	do_action( 'astra_footer_before' );
+function astra_footer_before()
+{
+	do_action('astra_footer_before');
 }
 
 /**
  * Footer after
  */
-function astra_footer_after() {
-	do_action( 'astra_footer_after' );
+function astra_footer_after()
+{
+	do_action('astra_footer_after');
 }
 
 /**
  * Footer top
  */
-function astra_footer_content_top() {
-	do_action( 'astra_footer_content_top' );
+function astra_footer_content_top()
+{
+	do_action('astra_footer_content_top');
 }
 
 /**
  * Footer
  */
-function astra_footer_content() {
-	do_action( 'astra_footer_content' );
+function astra_footer_content()
+{
+	do_action('astra_footer_content');
 }
 
 /**
  * Footer bottom
  */
-function astra_footer_content_bottom() {
-	do_action( 'astra_footer_content_bottom' );
+function astra_footer_content_bottom()
+{
+	do_action('astra_footer_content_bottom');
 }
 
 /**
  * Archive header
  */
-function astra_archive_header() {
-	do_action( 'astra_archive_header' );
+function astra_archive_header()
+{
+	do_action('astra_archive_header');
 }
 
 /**
  * Pagination
  */
-function astra_pagination() {
-	do_action( 'astra_pagination' );
+function astra_pagination()
+{
+	do_action('astra_pagination');
 }
 
 /**
  * Entry content single
  */
-function astra_entry_content_single() {
-	do_action( 'astra_entry_content_single' );
+function astra_entry_content_single()
+{
+	do_action('astra_entry_content_single');
 }
 
 /**
@@ -446,53 +495,60 @@ function astra_entry_content_single() {
  *
  * @since 4.0.0
  */
-function astra_entry_content_single_page() {
-	do_action( 'astra_entry_content_single_page' );
+function astra_entry_content_single_page()
+{
+	do_action('astra_entry_content_single_page');
 }
 
 /**
  * 404
  */
-function astra_entry_content_404_page() {
-	do_action( 'astra_entry_content_404_page' );
+function astra_entry_content_404_page()
+{
+	do_action('astra_entry_content_404_page');
 }
 
 /**
  * Entry content blog
  */
-function astra_entry_content_blog() {
-	do_action( 'astra_entry_content_blog' );
+function astra_entry_content_blog()
+{
+	do_action('astra_entry_content_blog');
 }
 
 /**
  * Blog featured post section
  */
-function astra_blog_post_featured_format() {
-	do_action( 'astra_blog_post_featured_format' );
+function astra_blog_post_featured_format()
+{
+	do_action('astra_blog_post_featured_format');
 }
 
 /**
  * Primary Content Top
  */
-function astra_primary_content_top() {
-	do_action( 'astra_primary_content_top' );
+function astra_primary_content_top()
+{
+	do_action('astra_primary_content_top');
 }
 
 /**
  * Primary Content Bottom
  */
-function astra_primary_content_bottom() {
-	do_action( 'astra_primary_content_bottom' );
+function astra_primary_content_bottom()
+{
+	do_action('astra_primary_content_bottom');
 }
 
 /**
  * 404 Page content template action.
  */
-function astra_404_content_template() {
-	do_action( 'astra_404_content_template' );
+function astra_404_content_template()
+{
+	do_action('astra_404_content_template');
 }
 
-if ( ! function_exists( 'wp_body_open' ) ) {
+if (!function_exists('wp_body_open')) {
 
 	/**
 	 * Fire the wp_body_open action.
@@ -500,7 +556,8 @@ if ( ! function_exists( 'wp_body_open' ) ) {
 	 *
 	 * @since 1.8.7
 	 */
-	function wp_body_open() { // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
-		do_action( 'wp_body_open' ); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
+	function wp_body_open()
+	{ // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedFunctionFound
+		do_action('wp_body_open'); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
 	}
 }

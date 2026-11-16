@@ -58,6 +58,10 @@ if (is_admin()) {
 	require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-fonts-data.php';
 }
 
+//
+require_once ASTRA_THEME_DIR . 'inc/property/site-header/site-header.php';
+require_once ASTRA_THEME_DIR . 'inc/property/site-footer/site-footer.php';
+
 require_once ASTRA_THEME_DIR . 'inc/lib/webfont/class-astra-webfont-loader.php';
 require_once ASTRA_THEME_DIR . 'inc/lib/docs/class-astra-docs-loader.php';
 require_once ASTRA_THEME_DIR . 'inc/customizer/class-astra-fonts.php';
@@ -221,4 +225,5 @@ require_once ASTRA_THEME_DIR . 'inc/property/helpers/template-helpers.php';
 require_once ASTRA_THEME_DIR . 'inc/property/helpers/filters.php';
 require_once ASTRA_THEME_DIR . 'inc/property/loadPropertyAssets.php';
 require_once ASTRA_THEME_DIR . 'inc/property/seo/seo.php';
+require_once ASTRA_THEME_DIR . 'inc/property/helpers/property-theme-setup.php';
 

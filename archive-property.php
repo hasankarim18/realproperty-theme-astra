@@ -18,16 +18,34 @@ $keyword = isset($args['s']) ? $args['s'] : trim(get_search_query(false));
 $chips = pd_active_chips();
 $has_filters = pd_has_filters();
 $sort = isset($args['sort']) ? $args['sort'] : '';
+
+// new edit
+$listing_count = (int) wp_count_posts('property')->publish;
+$city_count = wp_count_terms(array('taxonomy' => 'property_location', 'hide_empty' => true));
+$city_count = is_wp_error($city_count) ? 0 : (int) $city_count;
 ?>
-<main>
+<main id="main">
     <section class="archive-hero" aria-labelledby="archive-title">
         <div class="hero-inner">
             <p class="eyebrow"><?php esc_html_e('Find your next place', 'property-directory'); ?></p>
-            <h1 id="archive-title"><?php esc_html_e('Explore properties', 'property-directory'); ?></h1>
+            <h1 id="archive-title"><?php esc_html_e('Explore', 'property-directory'); ?> <span
+                    class="hero-accent"><?php esc_html_e('properties', 'property-directory'); ?></span></h1>
             <p class="hero-copy">
                 <?php esc_html_e('Browse homes and commercial properties across Bangladesh.', 'property-directory'); ?>
             </p>
 
+            <?php if ($listing_count || $city_count): ?>
+                <ul class="hero-meta">
+                    <?php if ($listing_count): ?>
+                        <li><?php echo esc_html(sprintf(_n('%s listing', '%s listings', $listing_count, 'property-directory'), number_format_i18n($listing_count))); ?>
+                        </li>
+                    <?php endif; ?>
+                    <?php if ($city_count): ?>
+                        <li><?php echo esc_html(sprintf(_n('%s city', '%s cities', $city_count, 'property-directory'), number_format_i18n($city_count))); ?>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            <?php endif; ?>
             <form class="search-bar" role="search" method="get"
                 action="<?php echo esc_url(get_post_type_archive_link('property')); ?>">
                 <label class="search-field search-location">

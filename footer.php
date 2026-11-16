@@ -10,27 +10,22 @@
  * @since 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (!defined('ABSPATH')) {
 	exit; // Exit if accessed directly.
 }
 
 ?>
-<?php astra_content_bottom(); ?>
-	</div> <!-- ast-container -->
-	</div><!-- #content -->
+
+
+</div>
 <?php
-	astra_content_after();
-
-	astra_footer_before();
-
-	astra_footer();
-
-	astra_footer_after();
+do_action('rp_site_footer');
 ?>
-	</div><!-- #page -->
+</div><!-- #page -->
 <?php
-	astra_body_bottom();
-	wp_footer();
+
+wp_footer();
 ?>
-	</body>
+</body>
+
 </html>

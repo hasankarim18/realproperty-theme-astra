@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Shell(php -l single-property.php)"
+    ],
+    "deny": [],
+    "defaultMode": "default"
+  }
+}
