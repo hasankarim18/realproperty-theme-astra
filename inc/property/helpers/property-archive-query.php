@@ -37,6 +37,11 @@ function pd_property_archive_query($query)
         return;
     }
 
+    if ($query->is_post_type_archive('agent')) {
+        $query->set('posts_per_page', 6);
+        return;
+    }
+
     $is_archive = $query->is_post_type_archive('property');
     $is_search = $query->is_search() && in_array('property', (array) $query->get('post_type'), true);
 

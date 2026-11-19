@@ -154,7 +154,7 @@ function pd_card_facts($post_id = null)
     return $facts;
 }
 
-function pd_pagination($query = null)
+function pd_pagination($query = null, $aria_label = '')
 {
     global $wp_query;
     $query = $query ? $query : $wp_query;
@@ -183,7 +183,11 @@ function pd_pagination($query = null)
         return '';
     }
 
-    $out = '<nav class="pagination" aria-label="' . esc_attr__('Property pages', 'property-directory') . '">';
+    if ('' === $aria_label) {
+        $aria_label = __('Property pages', 'property-directory');
+    }
+
+    $out = '<nav class="pagination" aria-label="' . esc_attr($aria_label) . '">';
 
     // Previous arrow.
     if ($current > 1) {

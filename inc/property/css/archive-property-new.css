@@ -348,6 +348,9 @@ main {
   align-items: start;
   gap: 25px;
 }
+.archive-layout.archive-agent-layout {
+  grid-template-columns: minmax(0, 1fr);
+}
 
 /* ---------- 5. Sidebar filters ---------- */
 .filter-sidebar {
@@ -1241,4 +1244,360 @@ main {
   .results-area.is-loading .no-results::after {
     animation: pd-fade-in 0.01ms forwards;
   }
+}
+
+/* ##archive-agent #agent Archive agent */
+
+/* ---------- Agent Profile Card ---------- */
+
+.rp-agent-grid {
+  display: flex;
+  width: 100%;
+  align-content: space-around;
+  flex-wrap: wrap;
+}
+
+.rp-agent-card {
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--white);
+  transition:
+    box-shadow 0.16s ease,
+    transform 0.16s ease;
+}
+
+.rp-agent-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px #0e2a3512;
+}
+
+/* Agent image */
+
+.rp-agent-card__image {
+  position: relative;
+  min-height: 190px;
+  display: block;
+  overflow: hidden;
+  background-color: var(--mist);
+  background-image: linear-gradient(135deg, #c8d9d0, #e6f1f2 48%, #93aba0);
+  isolation: isolate;
+}
+
+.rp-agent-card__image img {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  display: block;
+  object-fit: cover;
+  opacity: 1;
+  visibility: visible;
+  transition: transform 0.3s ease;
+}
+
+.rp-agent-card:hover .rp-agent-card__image img {
+  transform: scale(1.04);
+}
+
+/* Image overlay */
+
+.rp-agent-card__image::after {
+  position: absolute;
+  inset: 45% 0 0;
+  z-index: 2;
+  content: "";
+  background: linear-gradient(180deg, transparent, #0e2a354a);
+  pointer-events: none;
+}
+
+/* Agent role badge */
+
+.rp-agent-card__role {
+  position: absolute;
+  z-index: 3;
+  bottom: 11px;
+  left: 11px;
+  padding: 5px 9px;
+  border-radius: 4px;
+  color: var(--white);
+  background: var(--teal);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Card body */
+
+.rp-agent-card__body {
+  padding: 14px 13px 12px;
+}
+
+/* Designation */
+
+.rp-agent-card__designation {
+  margin-bottom: 5px;
+  color: var(--teal);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Agent name */
+
+.rp-agent-card__name {
+  min-height: 22px;
+  margin: 0 0 9px;
+  color: var(--midnight);
+  font-size: 15px;
+  letter-spacing: -0.02em;
+  line-height: 1.4;
+}
+
+.rp-agent-card__name a {
+  color: var(--midnight);
+  text-decoration: none;
+}
+
+.rp-agent-card__name a:hover {
+  color: var(--teal);
+}
+
+/* Description */
+
+.rp-agent-card__description {
+  min-height: 54px;
+  margin: 0 0 12px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+
+  color: var(--slate);
+  font-size: 11px;
+  line-height: 1.65;
+}
+
+/* Contact information */
+
+.rp-agent-card__contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 11px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.rp-agent-card__contact a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+  color: var(--slate);
+  font-size: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.rp-agent-card__contact a span {
+  flex-shrink: 0;
+  color: var(--teal);
+  font-size: 13px;
+}
+
+.rp-agent-card__contact a:hover {
+  color: var(--teal);
+}
+
+/* Footer */
+
+.rp-agent-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-top: 11px;
+}
+
+.rp-agent-card__link {
+  color: var(--teal);
+  font-size: 10px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.rp-agent-card__link span {
+  padding-left: 3px;
+}
+
+.rp-agent-card__link:hover {
+  color: var(--midnight);
+}
+
+/* ---------- Agent Archive Grid ---------- */
+
+.rp-agent-grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Agent cards */
+
+.rp-agent-card {
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Keep card bodies equal in height */
+
+.rp-agent-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 14px 13px 12px;
+}
+
+/* Push footer to bottom */
+
+.rp-agent-card__footer {
+  margin-top: auto;
+}
+
+/* ---------- Tablet ---------- */
+
+@media (max-width: 1024px) {
+  .rp-agent-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 600px) {
+  .rp-agent-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .rp-agent-card__image {
+    min-height: 210px;
+  }
+}
+
+/* ---------- Small Mobile ---------- */
+
+@media (max-width: 380px) {
+  .rp-agent-grid {
+    gap: 14px;
+  }
+
+  .rp-agent-card__image {
+    min-height: 180px;
+  }
+}
+
+/* ---------- Agent Image ---------- */
+
+.rp-agent-card__image {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  min-height: 0;
+  overflow: hidden;
+  background-color: var(--mist);
+  background-image: linear-gradient(135deg, #c8d9d0, #e6f1f2 48%, #93aba0);
+  isolation: isolate;
+}
+
+/* Actual featured image */
+
+.rp-agent-card__image img {
+  position: absolute !important;
+  inset: 0;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  max-height: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  object-fit: cover !important;
+  object-position: center center;
+  opacity: 1 !important;
+  visibility: visible !important;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+/* Hover animation */
+
+.rp-agent-card:hover .rp-agent-card__image img {
+  transform: scale(1.04);
+}
+
+/* Image overlay */
+
+.rp-agent-card__image::after {
+  position: absolute;
+  inset: 45% 0 0;
+  z-index: 2;
+  content: "";
+  background: linear-gradient(180deg, transparent, #0e2a354a);
+  pointer-events: none;
+}
+
+/* Agent role badge */
+
+.rp-agent-card__role {
+  position: absolute;
+  z-index: 3;
+  bottom: 11px;
+  left: 11px;
+  padding: 5px 9px;
+  border-radius: 4px;
+  color: var(--white);
+  background: var(--teal);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Tablet */
+
+@media (max-width: 1024px) {
+  .rp-agent-card__image {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .rp-agent-card__image {
+    aspect-ratio: 16 / 10;
+  }
+}
+.rp-agent-card__placeholder {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--slate);
+  font-size: 48px;
 }
