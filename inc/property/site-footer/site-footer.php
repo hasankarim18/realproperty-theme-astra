@@ -30,7 +30,7 @@ function rp_site_footer_callback()
 
         <div class="footer-main">
             <div class="footer-about">
-                <?php echo pd_brand_html('brand footer-brand'); // Escaped inside the helper. ?>
+                <?php the_custom_logo(); // Escaped inside the helper. ?>
                 <p><?php esc_html_e('Find a place to call home. Browse homes and commercial properties for sale and rent.', 'property-directory'); ?>
                 </p>
                 <ul class="footer-contact">
@@ -90,7 +90,8 @@ function rp_site_footer_callback()
         <div class="footer-bottom">
             <div class="footer-bottom-inner">
                 <p>© <?php echo esc_html(wp_date('Y')); ?>     <?php echo esc_html(get_bloginfo('name')); ?>.
-                    <?php esc_html_e('All rights reserved.', 'property-directory'); ?></p>
+                    <?php esc_html_e('All rights reserved.', 'property-directory'); ?>
+                </p>
                 <ul class="footer-legal">
                     <li><a href="#"><?php esc_html_e('Back to top', 'property-directory'); ?> ↑</a></li>
                 </ul>

@@ -1,7 +1,23 @@
 {
   "permissions": {
     "allow": [
-      "Shell(php -l single-property.php)"
+      "Shell(php -l single-property.php)",
+      "Shell(git:*)",
+      "Shell(php -l template-parts/property-gallery-modal.php)",
+      "Shell(php -l inc/property/loadPropertyAssets.php)",
+      "Shell(node --check inc/property/js/single-property.js)",
+      "Shell(powershell -NoProfile -Command \"Select-String -Path '..\\..\\wp-includes\\version.php' -Pattern 'wp_version =' | Select-Object -First 1\")",
+      "Shell(rg -n \"property_custom_header|pd_primary_nav_fallback|pd_brand_html|pd_list_property_url|site-header\\.php\" inc functions.php 2>nul || echo \"---\")",
+      "Shell(rg -n \"wp_enqueue_script.*header|header\\.js\" 2>nul || echo \"---\")",
+      "Shell(rg -n \"sub-menu|menu-item-has-children\" inc/property 2>nul || echo \"---\")",
+      "Shell(rg -n \"pd_primary_nav_fallback|pd_brand_html|pd_list_property_url\" -S 2>nul || echo \"---\")",
+      "Shell(rg -n \"property_custom_header\" -S 2>nul || echo \"---\")",
+      "Shell(rg -n \"register_nav_menus|theme_location.*primary\" -S 2>nul | head -40)",
+      "Shell(rg -n \"nav-toggle|primary-nav|menu-item-has-children|sub-menu\" -S 2>nul | head -40)",
+      "Shell(rg -n \"pd_is_property_listing\" -S 2>nul | head -20)",
+      "Shell(rg -n \"loadPropertyAssets|property_enqueue_scripts|pd_is_property_listing|header\\.css\" -S 2>nul | head -50)",
+      "Shell(rg -n \"function pd_is_property_listing|function pd_primary_nav_fallback|function pd_brand_html|function pd_list_property_url\" -S 2>nul || echo \"none\")",
+      "powershell"
     ],
     "deny": [],
     "defaultMode": "default"
